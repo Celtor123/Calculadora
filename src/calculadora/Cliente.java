@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 public class Cliente {
     
     public static void main(String[] args) throws IOException, InterruptedException {
-                  
+                 Cliente a= new Cliente(); 
 			//Creando socket cliente
 			Socket clienteSocket=new Socket();
 			//Estableciendo conexion			
@@ -26,6 +26,7 @@ public class Cliente {
                     double p = 0;
         try{
         r=Double.parseDouble(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
+      
         }catch(NumberFormatException excepcion){
             System.out.println("No es un numero"); 
            
@@ -41,6 +42,10 @@ public class Cliente {
       if(seleccion=="Sumar"||seleccion=="Restar"||seleccion=="Multiplicar"||seleccion=="Dividir"){
         p=Double.parseDouble(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
       }
+      if (seleccion=="NADA"){
+          JOptionPane.showMessageDialog(null,"Gracias por utilizar la aplicación");
+          clienteSocket.close();
+      }
     
         String numer=r+"";
         String numero=p+"";
@@ -53,7 +58,7 @@ public class Cliente {
             
             
             
-            byte[] resultado=new byte[25];
+            byte[] resultado=new byte[70];
             is.read(resultado);
             String g= new String(resultado);
             System.out.println("El resultado es:"+g);

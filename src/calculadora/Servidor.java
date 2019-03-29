@@ -14,7 +14,7 @@ public class Servidor {
     public static void main(String[] args) throws IOException {
  double resultado = 0;
   double as,ar;
-  String p,x,g;
+  String p,x,g,hy = null;
                     
 			//Creando socket servidor	
 			ServerSocket serverSocket=new ServerSocket();
@@ -50,24 +50,41 @@ public class Servidor {
                       
                             if(p.contains("Sumar")){
                                resultado=as+ar;
-                              
+                               hy=resultado+"";
                             }
                             else if(p.contains("Restar")){
                                resultado=as-ar;
-                               
+                                hy=resultado+"";
                             }
                             else if(p.contains("Multiplicar")){
                                resultado=as*ar;
-                               
+                                hy=resultado+"";
                             }
                             else if(p.contains("Dividir")){
+                                if(ar==0){
+                                    System.out.println("Division por cero infinito");
+                                    hy="La division entre cero no es una operacion aceptada, ERROR LÓGICO";
+                                    if(as==0){
+                                        System.out.println("división entre ceros");    
+                                        hy="La division entre ceros da un resultado nulo";
+                                            }
+                                }
+                                else{
                                resultado=as/ar;
-                               
+                                hy=resultado+"";
+                                }
                             }
                             else if(p.contains("Raíz")){
-                               resultado=Math.sqrt(as);    
+                                if(as<0){
+                                    System.out.println("El numero es negativo y por lo tanto es imposible su operación");
+                                 resultado=as;
+                                  hy="El error es en la raíz del numero: "+resultado+"\n disculpe las molestias";
+                                }else{
+                               resultado=Math.sqrt(as);  
+                                hy=resultado+"";
+                                }
                             }
-                        String hy=resultado+"";
+                 System.out.println(hy);
 			os.write(hy.getBytes());
 			System.out.println("Cerrando el nuevo socket");
 
