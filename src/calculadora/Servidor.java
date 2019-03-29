@@ -10,8 +10,9 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 
 public class Servidor {
+    
     public static void main(String[] args) throws IOException {
-  double resultado = 0 ;
+ double resultado = 0;
   double as,ar;
   String p,x,g;
                     
@@ -28,12 +29,13 @@ public class Servidor {
 			OutputStream os=newSocket.getOutputStream();                        
 			
                        
-                           byte[] mensaje1=new byte[11];
-                           byte[] mensaje2=new byte[11];
-                           byte[] mensaje3=new byte[11];
+                           byte[] mensaje1=new byte[14];
+                           byte[] mensaje2=new byte[14];
+                           byte[] mensaje3=new byte[14];
 			is.read(mensaje1);
                          is.read(mensaje2);
                          is.read(mensaje3);
+                         
                         g= new String(mensaje1);
                           as=Double.parseDouble(g);
 			System.out.println("Mensaje recibido: "+g);
@@ -46,28 +48,25 @@ public class Servidor {
                         ar=Double.parseDouble(x);
 			System.out.println("Mensaje recibido: "+x);
                       
-                    
-                       switch(p){
-                           case "Sumar":
+                            if(p.contains("Sumar")){
                                resultado=as+ar;
-                               System.out.println("loco"+resultado);
-                               break;
-                                case "Restar":
+                              
+                            }
+                            else if(p.contains("Restar")){
                                resultado=as-ar;
-                               break;
-                                case "Multiplicar":
+                               
+                            }
+                            else if(p.contains("Multiplicar")){
                                resultado=as*ar;
-                               break;
-                                case "Dividir":
+                               
+                            }
+                            else if(p.contains("Dividir")){
                                resultado=as/ar;
-                               break;
-                                case "Raíz cuadrada":
-                               resultado=as;
-                                  break;
-                                case "":
-                               String pepito="Gracias por utilizar la aplicacion";
-                                 break;   
-                       }
+                               
+                            }
+                            else if(p.contains("Raíz")){
+                               resultado=Math.sqrt(as);    
+                            }
                         String hy=resultado+"";
 			os.write(hy.getBytes());
 			System.out.println("Cerrando el nuevo socket");

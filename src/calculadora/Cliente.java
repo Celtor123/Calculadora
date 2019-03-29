@@ -22,10 +22,10 @@ public class Cliente {
 			InputStream is = clienteSocket.getInputStream();
 			OutputStream os= clienteSocket.getOutputStream();
 			
-                        int r = 0;
-                    int p = 0;
+                        double r = 0;
+                    double p = 0;
         try{
-        r=Integer.parseInt(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
+        r=Double.parseDouble(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
         }catch(NumberFormatException excepcion){
             System.out.println("No es un numero"); 
            
@@ -39,7 +39,7 @@ public class Cliente {
         
         
       if(seleccion=="Sumar"||seleccion=="Restar"||seleccion=="Multiplicar"||seleccion=="Dividir"){
-        p=Integer.parseInt(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
+        p=Double.parseDouble(JOptionPane.showInputDialog("Por favor, meta o numero para a seguinte operacion"));
       }
     
         String numer=r+"";
@@ -48,6 +48,11 @@ public class Cliente {
             os.write(numer.getBytes());
             os.write(selecion.getBytes());            
             os.write(numero.getBytes());
+            
+            
+            
+            
+            
             byte[] resultado=new byte[25];
             is.read(resultado);
             String g= new String(resultado);
