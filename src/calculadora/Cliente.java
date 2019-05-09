@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 public class Cliente {
     
     public static void main(String[] args) throws IOException, InterruptedException {
+        boolean re=false;
                  Cliente a= new Cliente(); 
 			//Creando socket cliente
 			Socket clienteSocket=new Socket();
@@ -50,21 +51,32 @@ public class Cliente {
         String numer=r+"";
         String numero=p+"";
        String selecion= (String) seleccion;
+       
             os.write(numer.getBytes());
-            os.write(selecion.getBytes());            
+        byte[] mensaje= new byte[27];
+            is.read(mensaje);
+            System.out.println(new String(mensaje));
+            os.write(selecion.getBytes()); 
+            is.read(mensaje);
+             System.out.println(new String(mensaje));
             os.write(numero.getBytes());
+            is.read(mensaje);
+             System.out.println(new String(mensaje));
             
             
             
             
-            
-            byte[] resultado=new byte[70];
-            is.read(resultado);
-            String g= new String(resultado);
-            System.out.println("El resultado es:"+g);
-            
-        clienteSocket.close();
-        //cierro el socket
+
+    
+                byte[] resultado=new byte[70];
+                is.read(resultado);
+                String g= new String(resultado);
+                System.out.println("El resultado es:"+g);
+                
+                clienteSocket.close();
+                //cierro el socket
+        
     }
+    
    
 }

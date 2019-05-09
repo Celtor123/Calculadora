@@ -7,22 +7,22 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import javax.swing.JOptionPane;
 
 public class Servidor {
     
     public static void main(String[] args) throws IOException {
- double resultado = 0;
+  double resultado = 0;
   double as,ar;
   String p,x,g,hy = null;
                     
 			//Creando socket servidor	
-			ServerSocket serverSocket=new ServerSocket();
+			ServerSocket serverSocket;
+                        serverSocket = new ServerSocket();
 
 			
 			InetSocketAddress addr=new InetSocketAddress("localhost",6666);
 			serverSocket.bind(addr);
-
+                        
 			//Aceptando conexiones
 			Socket newSocket= serverSocket.accept();
 			InputStream is=newSocket.getInputStream();
@@ -32,10 +32,13 @@ public class Servidor {
                            byte[] mensaje1=new byte[14];
                            byte[] mensaje2=new byte[14];
                            byte[] mensaje3=new byte[14];
-			is.read(mensaje1);
+			 is.read(mensaje1);
+                         os.write("Recibido".getBytes());
                          is.read(mensaje2);
+                         os.write("Recibido2".getBytes());
                          is.read(mensaje3);
-                         
+                          os.write("Recibido3".getBytes());
+                        
                         g= new String(mensaje1);
                           as=Double.parseDouble(g);
 			System.out.println("Mensaje recibido: "+g);
